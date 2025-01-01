@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../context/CartContext";
 import toast from 'react-hot-toast';
 export default function WishList() {
-    let {getListInfo,addToCart,setCart,deletSpecificListItems} = useContext(CartContext)
+    let {getListInfo,addToCart,setCart,removeFromList} = useContext(CartContext)
     let [listData,setListData]=useState(null)
     async function getListData(){
       let data=await getListInfo()
-      console.log(data);
+      // localStorage.setItem('wishlist',JSON.stringify(data.data))
       setListData(data.data)
     }
     async function addProduct(proId) {
@@ -19,11 +19,18 @@ export default function WishList() {
         toast.error('Cannot add');
       }
     }
+    // async function deletItem(id) {
+    //   let data= await removeFromList(id);
+    //   let old_data_wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    //   let item = await old_data_wishlist['data'].filter((dt,key)=> {dt.id == id ? old_data_wishlist['data'].splice(key, 1) : console.log('no thing')});
+    //   localStorage.setItem('wishlist', JSON.stringify(old_data_wishlist));
+    //   setListData(old_data_wishlist);
+    // }
     async function deletItem(id) {
-      let data= await deletSpecificListItems(id)
-      setListData(data.data)
+      await removeFromList(id);
+      let wishlist_data = await getListInfo();
+      setListData(wishlist_data.data);
     }
-    
     useEffect(()=>{
       getListData()
     },[])
