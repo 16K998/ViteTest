@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logo from '../../assets/images/freshcart-logo.svg'
 import { useContext } from 'react'
 import { counterContext } from '../../../context/CounterContext'
@@ -30,7 +30,7 @@ export default function Navbar() {
       <nav className="bg-gray-50 p-2 dark:bg-gray-900 fixed w-full z-20 top-0 start-0 dark:border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
           <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src={logo} className="h-8" alt="Logo" />
+            <Link to=''><img src={logo} className="h-8" alt="Logo" /></Link>
           </a>
 
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
